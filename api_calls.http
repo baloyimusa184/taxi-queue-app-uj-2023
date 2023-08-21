@@ -1,0 +1,15 @@
+GET http://localhost:4015/api/taxi/queue
+
+###
+
+POST http://localhost:4015/api/taxi/depart
+
+###
+
+POST http://localhost:4015/api/taxi/join
+
+###
+POST http://localhost:4015/api/passenger/join
+
+###
+POST http://localhost:4015/api/passenger/leave
