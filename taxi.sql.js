@@ -44,7 +44,7 @@ export async function taxiDepart() {
     const taxiCount = await taxiQueueLength();
 
     if (taxiCount >= 12) {
-        await db.run('UPDATE taxi_queue SET taxi_queue_count = taxi_queue_count - 12');
+        await db.run('UPDATE taxi_queue SET taxi_queue_count = taxi_queue_count-12');
     } else {
         // Handle the case where there are not enough taxis for departure
     }

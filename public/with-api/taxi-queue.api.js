@@ -51,22 +51,27 @@ document.addEventListener('alpine:init', () => {
                         this.updateTaxiQueueLength();
                     });
             },
-
-			taxiDepart() {
-				axios
-					.post('/api/taxi/depart')
-					.then(response => {
-						if (response.status === 200) {
-							this.updateTaxiQueueLength();
-						} else {
-							// Handle the case where there are not enough taxis for departure
-							console.error('Not enough taxis for departure');
-						}
-					})
-					.catch(error => {
-						console.error('An error occurred during taxi departure:', error);
-					});
-			}
+            taxiDepart() {
+    axios
+        .post('/api/taxi/depart')
+        .then(response => {
+            if (response.status === 200) {
+                const passengerCount = this.queueLength;
+                if (passengerCount >= 12) {
+                    this.updateTaxiQueueLength();
+                    this.updateQueueLength(); // Reset passenger count
+                } else {
+                    console.error('Not enough passengers for taxi departure');
+                }
+            } else {
+                console.error('Taxi departure failed');
+            }
+        })
+        .catch(error => {
+            console.error('An error occurred during taxi departure:', error);
+        });
+}
+            
 			
         }
     });
